@@ -370,7 +370,7 @@ export default function Home() {
                   transition={{ duration: 0.6, delay: i * 0.08, ease: [0.215, 0.61, 0.355, 1] }}
                   className="min-w-[280px] sm:min-w-[320px] lg:min-w-[380px] flex-shrink-0"
                 >
-                  <div className="aspect-[9/16] w-full bg-cream/5 flex items-center justify-center text-cream/20 text-xs font-bold tracking-[0.2em] uppercase">
+                  <div className="aspect-video w-full bg-cream/5 flex items-center justify-center text-cream/20 text-xs font-bold tracking-[0.2em] uppercase">
                     Video
                   </div>
                   <div className="pt-4 flex items-center justify-between">
