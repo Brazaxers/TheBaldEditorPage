@@ -337,6 +337,52 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Video carousel section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, ease: [0.215, 0.61, 0.355, 1] }}
+          className="mt-28 pt-14 border-t border-cream/10"
+        >
+          <div className="flex items-center gap-4 mb-12">
+            <span className="text-xs font-bold tracking-[0.3em] uppercase text-orange">
+              Top Performing
+            </span>
+            <div className="flex-1 h-px bg-cream/10" />
+            <span className="text-xs font-bold tracking-[0.3em] uppercase text-cream/30">
+              Most Views
+            </span>
+          </div>
+
+          <div className="overflow-hidden -mx-6 sm:-mx-8 lg:-mx-12">
+            <motion.div
+              drag="x"
+              dragConstraints={{ right: 0, left: -800 }}
+              className="flex gap-6 px-6 sm:px-8 lg:px-12 cursor-grab active:cursor-grabbing"
+            >
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: i * 0.08, ease: [0.215, 0.61, 0.355, 1] }}
+                  className="min-w-[280px] sm:min-w-[320px] lg:min-w-[380px] flex-shrink-0"
+                >
+                  <div className="aspect-video w-full bg-cream/5 flex items-center justify-center text-cream/20 text-xs font-bold tracking-[0.2em] uppercase">
+                    Video
+                  </div>
+                  <div className="pt-4 flex items-center justify-between">
+                    <div className="h-3 w-24 bg-cream/5" />
+                    <div className="h-3 w-20 bg-cream/5" />
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </motion.div>
+
         {/* Testimonials section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
