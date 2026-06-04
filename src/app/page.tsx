@@ -162,28 +162,14 @@ const fadeUp = {
               >
                 EDITING
               </motion.h1>
-              <motion.div
-                custom={5}
-                variants={fadeUp}
-                initial="hidden"
-                animate="visible"
+              <div
                 onClick={triggerShake}
-                className="inline-block bg-orange px-4 py-2 mt-2 cursor-pointer"
-                style={isShaking ? { animation: "shake 0.5s" } : {}}
-                key={`box-${isShaking ? "on" : "off"}`}
+                className={`inline-block bg-orange px-4 py-2 mt-2 cursor-pointer ${isShaking ? "animate-shake" : ""}`}
               >
-                <motion.h1
-                  custom={5}
-                  variants={fadeUp}
-                  initial="hidden"
-                  animate="visible"
-                  className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black leading-[0.9] tracking-tight text-white"
-                  style={isShaking ? { animation: "shake 0.5s" } : {}}
-                  key={`text-${isShaking ? "on" : "off"}`}
-                >
+                <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black leading-[0.9] tracking-tight text-white">
                   THAT HITS.
-                </motion.h1>
-              </motion.div>
+                </h1>
+              </div>
             </div>
 
             {/* Editorial pull quote style */}
@@ -496,6 +482,9 @@ const fadeUp = {
           40% { transform: translateX(3px) rotate(2deg); }
           60% { transform: translateX(-3px) rotate(-2deg); }
           80% { transform: translateX(3px) rotate(2deg); }
+        }
+        .animate-shake {
+          animation: shake 0.5s ease-in-out;
         }
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
