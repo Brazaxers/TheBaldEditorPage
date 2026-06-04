@@ -75,7 +75,7 @@ const fadeUp = {
   };
 
   return (
-    <main className="min-h-screen bg-black text-cream selection:bg-orange/30">
+    <main className="min-h-screen bg-purple text-cream overflow-hidden">
       <div className="relative px-6 sm:px-8 lg:px-12 py-12 max-w-7xl mx-auto">
         {/* Logo + badge */}
         <motion.div
