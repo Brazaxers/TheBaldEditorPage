@@ -11,6 +11,26 @@ export default function Home() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const [centeredReel, setCenteredReel] = useState(0);
+  const [centeredTestimonial, setCenteredTestimonial] = useState(0);
+
+  const handleReelScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    const container = e.currentTarget;
+    const scrollLeft = container.scrollLeft;
+    const cardWidth = container.firstElementChild?.clientWidth || 320;
+    const gap = 24;
+    const index = Math.round(scrollLeft / (cardWidth + gap));
+    setCenteredReel(index);
+  };
+
+  const handleTestimonialScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    const container = e.currentTarget;
+    const scrollLeft = container.scrollLeft;
+    const cardWidth = container.firstElementChild?.clientWidth || 320;
+    const gap = 24;
+    const index = Math.round(scrollLeft / (cardWidth + gap));
+    setCenteredTestimonial(index);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -348,9 +368,10 @@ export default function Home() {
           </div>
 
           <div
+            onScroll={handleReelScroll}
             className="overflow-x-scroll scroll-snap-x scroll-snap-mandatory scrollbar-hide -mx-6 sm:-mx-8 lg:-mx-12 py-2"
           >
-            <div className="flex gap-6 px-6 sm:px-8 lg:px-12 w-max">
+            <div className="flex gap-6 px-6 sm:px-8 lg:px-12 w-max items-center">
               {[
                 { gif: "/videos/reel1.gif", views: "3.1M", link: "https://www.instagram.com/reel/DUlLiqLkcFC/" },
                 { gif: "/videos/reel2.gif", views: "2.7M", link: "https://www.instagram.com/reel/DRnGP-kkreS/" },
@@ -358,14 +379,17 @@ export default function Home() {
                 { gif: "/videos/reel4.gif", views: "335K", link: "https://www.instagram.com/reel/DIjFFAUTD5v/" },
                 { gif: "/videos/reel5.gif", views: "6.2M", link: "https://www.instagram.com/reel/DS4jOvGiRDC/" },
                 { gif: "/videos/reel6.gif", views: "1.2M", link: "https://www.instagram.com/reel/DY4OVgrsK6V/" },
-              ].map((reel, i) => (
+              ].map((reel, i) => {
+                const dist = Math.abs(i - centeredReel);
+                const scale = dist === 0 ? 1 : dist === 1 ? 0.88 : 0.78;
+                return (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  whileHover={{ scale: 1.02, zIndex: 10 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: i * 0.08, ease: [0.215, 0.61, 0.355, 1] }}
+                  animate={{ scale }}
+                  transition={{ duration: 0.4, ease: [0.215, 0.61, 0.355, 1] }}
                   className="w-[280px] sm:w-[320px] lg:w-[380px] flex-shrink-0 scroll-snap-center"
                 >
                   <a href={reel.link} target="_blank" rel="noopener noreferrer" className="block relative aspect-[9/16] w-full bg-purple overflow-hidden">
@@ -382,7 +406,8 @@ export default function Home() {
                     </span>
                   </a>
                 </motion.div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </motion.div>
@@ -404,21 +429,25 @@ export default function Home() {
           </div>
 
           <div
+            onScroll={handleTestimonialScroll}
             className="overflow-x-scroll scroll-snap-x scroll-snap-mandatory scrollbar-hide -mx-6 sm:-mx-8 lg:-mx-12 py-2"
           >
-            <div className="flex gap-6 px-6 sm:px-8 lg:px-12 w-max">
+            <div className="flex gap-6 px-6 sm:px-8 lg:px-12 w-max items-center">
               {[
                 { image: "/images/testimonial-deonn.jpg", handle: "@de.onn", link: "https://www.instagram.com/de.onn/", text: "Ever since I started working with Raza, my life has just become way simpler. I'm able to expand into different content genres without worrying about my videos getting edited." },
                 { image: "/images/testimonial-itzthomzi.jpg", handle: "@itzthomzi", link: "https://www.instagram.com/itzthomzi/", text: "I have content scheduled for the next two weeks now. Wouldn't have been possible without such a great editor." },
                 { image: "/images/testimonial-socialfayaz.jpg", handle: "@social.fayaz", link: "https://www.instagram.com/social.fayaz/", text: "After working with me for about a year, Raza has now assigned a professional editor from his team to help me full time. No complaints." },
-              ].map((testimonial, i) => (
+              ].map((testimonial, i) => {
+                const dist = Math.abs(i - centeredTestimonial);
+                const scale = dist === 0 ? 1 : dist === 1 ? 0.88 : 0.78;
+                return (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  whileHover={{ scale: 1.02, zIndex: 10 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: i * 0.12, ease: [0.215, 0.61, 0.355, 1] }}
+                  animate={{ scale }}
+                  transition={{ duration: 0.4, ease: [0.215, 0.61, 0.355, 1] }}
                   className="w-[280px] sm:w-[320px] lg:w-[380px] flex-shrink-0 p-6 lg:p-8 flex flex-col scroll-snap-center"
                 >
                   <a href={testimonial.link} target="_blank" rel="noopener noreferrer" className="block relative aspect-square w-full rounded-2xl overflow-hidden bg-cream/5">
@@ -442,7 +471,8 @@ export default function Home() {
                     </p>
                   </div>
                 </motion.div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </motion.div>
