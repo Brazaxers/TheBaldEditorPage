@@ -369,7 +369,7 @@ export default function Home() {
 
           <div
             onScroll={handleReelScroll}
-            className="overflow-x-scroll scroll-snap-x scroll-snap-mandatory scrollbar-hide -mx-6 sm:-mx-8 lg:-mx-12 py-2"
+            className="overflow-x-scroll scroll-snap-x scrollbar-hide -mx-6 sm:-mx-8 lg:-mx-12 py-2 touch-pan-x select-none"
           >
             <div className="flex gap-6 px-6 sm:px-8 lg:px-12 w-max items-center">
               {[
@@ -430,7 +430,7 @@ export default function Home() {
 
           <div
             onScroll={handleTestimonialScroll}
-            className="overflow-x-scroll scroll-snap-x scroll-snap-mandatory scrollbar-hide -mx-6 sm:-mx-8 lg:-mx-12 py-2"
+            className="overflow-x-scroll scroll-snap-x scrollbar-hide -mx-6 sm:-mx-8 lg:-mx-12 py-2 touch-pan-x select-none"
           >
             <div className="flex gap-6 px-6 sm:px-8 lg:px-12 w-max items-center">
               {[
