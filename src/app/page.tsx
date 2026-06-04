@@ -23,9 +23,12 @@ export default function Home() {
   };
 
   useEffect(() => {
-    triggerShake();
-    const interval = setInterval(triggerShake, 1000);
-    setTimeout(() => clearInterval(interval), 5000);
+    const shakeStartTimeout = setTimeout(() => {
+      triggerShake();
+      const interval = setInterval(triggerShake, 1000);
+      setTimeout(() => clearInterval(interval), 5000);
+    }, 2000);
+    return () => clearTimeout(shakeStartTimeout);
   }, []);
 
   const scrollCarousel = (dir: "left" | "right", ref: React.RefObject<HTMLDivElement | null>) => {
