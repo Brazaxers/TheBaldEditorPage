@@ -340,9 +340,11 @@ export default function Home() {
           className="mt-28"
         >
           <div className="mb-12">
-            <span className="text-lg font-bold tracking-[0.3em] uppercase text-orange">
-              Top Performing
-            </span>
+            <div className="inline-block bg-orange px-4 py-2">
+              <span className="text-2xl sm:text-3xl lg:text-4xl font-black leading-[0.9] tracking-tight text-white">
+                TOP PERFORMING
+              </span>
+            </div>
           </div>
 
           <div
@@ -402,9 +404,11 @@ export default function Home() {
           className="mt-28"
         >
           <div className="mb-12">
-            <span className="text-lg font-bold tracking-[0.3em] uppercase text-orange">
-              Testimonials
-            </span>
+            <div className="inline-block bg-orange px-4 py-2">
+              <span className="text-2xl sm:text-3xl lg:text-4xl font-black leading-[0.9] tracking-tight text-white">
+                TESTIMONIALS
+              </span>
+            </div>
           </div>
 
           <div
@@ -419,9 +423,9 @@ export default function Home() {
           >
             <div className="flex gap-6 px-6 sm:px-8 lg:px-12 w-max">
               {[
-                { image: "/images/testimonial-deonn.jpg", handle: "@de.onn", text: "Ever since I started working with Raza, my life has just become way simpler. I'm able to expand into different content genres without worrying about my videos getting edited." },
-                { image: "/images/testimonial-itzthomzi.jpg", handle: "@itzthomzi", text: "I have content scheduled for the next two weeks now. Wouldn't have been possible without such a great editor." },
-                { image: "/images/testimonial-socialfayaz.jpg", handle: "@social.fayaz", text: "After working with me for about a year, Raza has now assigned a professional editor from his team to help me full time. No complaints." },
+                { image: "/images/testimonial-deonn.jpg", handle: "@de.onn", link: "https://www.instagram.com/de.onn/", text: "Ever since I started working with Raza, my life has just become way simpler. I'm able to expand into different content genres without worrying about my videos getting edited." },
+                { image: "/images/testimonial-itzthomzi.jpg", handle: "@itzthomzi", link: "https://www.instagram.com/itzthomzi/", text: "I have content scheduled for the next two weeks now. Wouldn't have been possible without such a great editor." },
+                { image: "/images/testimonial-socialfayaz.jpg", handle: "@social.fayaz", link: "https://www.instagram.com/social.fayaz/", text: "After working with me for about a year, Raza has now assigned a professional editor from his team to help me full time. No complaints." },
               ].map((testimonial, i) => (
                 <motion.div
                   key={i}
@@ -433,7 +437,7 @@ export default function Home() {
                   transition={{ duration: 0.6, delay: i * 0.12, ease: [0.215, 0.61, 0.355, 1] }}
                   className="w-[280px] sm:w-[320px] lg:w-[380px] flex-shrink-0 p-6 lg:p-8 flex flex-col"
                 >
-                  <div className="relative aspect-square w-full rounded-2xl overflow-hidden bg-cream/5">
+                  <a href={testimonial.link} target="_blank" rel="noopener noreferrer" className="block relative aspect-square w-full rounded-2xl overflow-hidden bg-cream/5">
                     <Image
                       src={testimonial.image}
                       alt={testimonial.handle}
@@ -446,7 +450,7 @@ export default function Home() {
                     <span className="absolute bottom-2 right-3 text-sm text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                       {testimonial.handle}
                     </span>
-                  </div>
+                  </a>
                   <div className="pt-4">
                     <span className="text-6xl leading-none text-orange/40 font-serif select-none">&ldquo;</span>
                     <p className="text-cream/70 text-sm sm:text-base leading-relaxed -mt-4">
