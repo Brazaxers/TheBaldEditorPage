@@ -471,12 +471,13 @@ const fadeUp = {
         {process.env.NODE_ENV === "development" && <Agentation />}
       </div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes shake {
-          0%, 50%, 100% { transform: translateX(0) rotate(0deg); }
-          10% { transform: translateX(-2px) rotate(-1deg); }
-          25% { transform: translateX(2px) rotate(1deg); }
-          40% { transform: translateX(-2px) rotate(-1deg); }
+          0%, 100% { transform: translateX(0) rotate(0deg); }
+          20% { transform: translateX(-3px) rotate(-2deg); }
+          40% { transform: translateX(3px) rotate(2deg); }
+          60% { transform: translateX(-3px) rotate(-2deg); }
+          80% { transform: translateX(3px) rotate(2deg); }
         }
         .animate-shake {
           animation: shake 0.5s 1s infinite;
