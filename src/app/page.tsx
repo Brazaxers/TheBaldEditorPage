@@ -344,7 +344,7 @@ export default function Home() {
               const maxScroll = container.scrollWidth - rect.width;
               container.scrollLeft = maxScroll * percent;
             }}
-            className="overflow-x-scroll scrollbar-hide -mx-6 sm:-mx-8 lg:-mx-12"
+            className="overflow-x-scroll scrollbar-hide -mx-6 sm:-mx-8 lg:-mx-12 py-2"
           >
             <div className="flex gap-6 px-6 sm:px-8 lg:px-12 w-max">
               {[
@@ -359,6 +359,8 @@ export default function Home() {
                   key={i}
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
+                  whileHover={{ scale: 1.03, zIndex: 10 }}
+                  whileTap={{ scale: 1.03 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: i * 0.08, ease: [0.215, 0.61, 0.355, 1] }}
                   className="w-[280px] sm:w-[320px] lg:w-[380px] flex-shrink-0"
@@ -404,7 +406,7 @@ export default function Home() {
               const maxScroll = container.scrollWidth - rect.width;
               container.scrollLeft = maxScroll * percent;
             }}
-            className="overflow-x-scroll scrollbar-hide -mx-6 sm:-mx-8 lg:-mx-12"
+            className="overflow-x-scroll scrollbar-hide -mx-6 sm:-mx-8 lg:-mx-12 py-2"
           >
             <div className="flex gap-6 px-6 sm:px-8 lg:px-12 w-max">
               {[
@@ -416,6 +418,8 @@ export default function Home() {
                   key={i}
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
+                  whileHover={{ scale: 1.03, zIndex: 10 }}
+                  whileTap={{ scale: 1.03 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: i * 0.12, ease: [0.215, 0.61, 0.355, 1] }}
                   className="w-[280px] sm:w-[320px] lg:w-[380px] flex-shrink-0 p-6 lg:p-8 flex flex-col"
