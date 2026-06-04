@@ -348,14 +348,7 @@ export default function Home() {
           </div>
 
           <div
-            onMouseMove={(e) => {
-              const container = e.currentTarget;
-              const rect = container.getBoundingClientRect();
-              const percent = (e.clientX - rect.left) / rect.width;
-              const maxScroll = container.scrollWidth - rect.width;
-              container.scrollLeft = maxScroll * percent;
-            }}
-            className="overflow-x-scroll scrollbar-hide -mx-6 sm:-mx-8 lg:-mx-12 py-2"
+            className="overflow-x-scroll scroll-snap-x scroll-snap-mandatory scrollbar-hide -mx-6 sm:-mx-8 lg:-mx-12 py-2"
           >
             <div className="flex gap-6 px-6 sm:px-8 lg:px-12 w-max">
               {[
@@ -373,7 +366,7 @@ export default function Home() {
                   whileHover={{ scale: 1.02, zIndex: 10 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: i * 0.08, ease: [0.215, 0.61, 0.355, 1] }}
-                  className="w-[280px] sm:w-[320px] lg:w-[380px] flex-shrink-0"
+                  className="w-[280px] sm:w-[320px] lg:w-[380px] flex-shrink-0 scroll-snap-center"
                 >
                   <a href={reel.link} target="_blank" rel="noopener noreferrer" className="block relative aspect-[9/16] w-full bg-purple overflow-hidden">
                     <Image
@@ -411,14 +404,7 @@ export default function Home() {
           </div>
 
           <div
-            onMouseMove={(e) => {
-              const container = e.currentTarget;
-              const rect = container.getBoundingClientRect();
-              const percent = (e.clientX - rect.left) / rect.width;
-              const maxScroll = container.scrollWidth - rect.width;
-              container.scrollLeft = maxScroll * percent;
-            }}
-            className="overflow-x-scroll scrollbar-hide -mx-6 sm:-mx-8 lg:-mx-12 py-2"
+            className="overflow-x-scroll scroll-snap-x scroll-snap-mandatory scrollbar-hide -mx-6 sm:-mx-8 lg:-mx-12 py-2"
           >
             <div className="flex gap-6 px-6 sm:px-8 lg:px-12 w-max">
               {[
@@ -433,7 +419,7 @@ export default function Home() {
                   whileHover={{ scale: 1.02, zIndex: 10 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: i * 0.12, ease: [0.215, 0.61, 0.355, 1] }}
-                  className="w-[280px] sm:w-[320px] lg:w-[380px] flex-shrink-0 p-6 lg:p-8 flex flex-col"
+                  className="w-[280px] sm:w-[320px] lg:w-[380px] flex-shrink-0 p-6 lg:p-8 flex flex-col scroll-snap-center"
                 >
                   <a href={testimonial.link} target="_blank" rel="noopener noreferrer" className="block relative aspect-square w-full rounded-2xl overflow-hidden bg-cream/5">
                     <Image
