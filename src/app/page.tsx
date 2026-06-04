@@ -22,6 +22,12 @@ export default function Home() {
     ref.current.scrollBy({ left: dir === "right" ? cardWidth + gap : -(cardWidth + gap), behavior: "smooth" });
   };
 
+  const handleTouchMove = (e: React.TouchEvent) => {
+    const carousel = e.currentTarget as HTMLDivElement;
+    if (carousel.scrollWidth === carousel.clientWidth) return;
+    e.stopPropagation();
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
@@ -332,7 +338,8 @@ const fadeUp = {
           <div className="relative">
             <div
               ref={reelRef}
-              className="overflow-x-scroll scroll-snap-x scrollbar-hide -mx-6 sm:-mx-8 lg:-mx-12 py-2 [touch-action:pan-x]"
+              onTouchMove={handleTouchMove}
+              className="overflow-x-scroll scroll-snap-x scrollbar-hide -mx-6 sm:-mx-8 lg:-mx-12 py-2"
             >
               <div className="flex gap-6 px-6 sm:px-8 lg:px-12 w-max">
                 {[
@@ -398,7 +405,8 @@ const fadeUp = {
           <div className="relative">
             <div
               ref={testimonialRef}
-              className="overflow-x-scroll scroll-snap-x scrollbar-hide -mx-6 sm:-mx-8 lg:-mx-12 py-2 [touch-action:pan-x]"
+              onTouchMove={handleTouchMove}
+              className="overflow-x-scroll scroll-snap-x scrollbar-hide -mx-6 sm:-mx-8 lg:-mx-12 py-2"
             >
               <div className="flex gap-6 px-6 sm:px-8 lg:px-12 w-max">
                 {[
