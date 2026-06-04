@@ -74,9 +74,6 @@ export default function Home() {
         className="h-1.5 bg-orange origin-left"
       />
 
-      {/* Thin rule */}
-      <div className="w-full h-px bg-cream/10" />
-
       <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-12 lg:py-16">
         {/* Header row — editorial style */}
         <div className="flex items-center justify-between mb-16">
@@ -117,12 +114,11 @@ export default function Home() {
               variants={fadeUp}
               initial="hidden"
               animate="visible"
-              className="flex items-center gap-4 mb-8"
+              className="flex items-center gap-3 mb-8"
             >
               <span className="text-xs font-bold tracking-[0.2em] uppercase text-orange">
                 Now Accepting Clients
               </span>
-              <div className="flex-1 h-px bg-cream/10" />
               <span className="text-xs font-bold tracking-[0.2em] uppercase text-cream/30">
                 2026
               </span>
@@ -183,15 +179,6 @@ export default function Home() {
               </p>
             </motion.div>
 
-            {/* Thin rule */}
-            <motion.div
-              custom={8}
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
-              className="w-full h-px bg-cream/10 mb-10"
-            />
-
             {/* Contact form — editorial style */}
             <motion.div
               custom={9}
@@ -200,12 +187,10 @@ export default function Home() {
               animate="visible"
             >
               {/* Form label */}
-              <div className="flex items-center gap-3 mb-6">
-                <div className="flex-1 h-px bg-cream/10" />
+              <div className="mb-6">
                 <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-cream/30">
                   Inquiry Form
                 </span>
-                <div className="flex-1 h-px bg-cream/10" />
               </div>
 
               {!submitted ? (
@@ -339,92 +324,134 @@ export default function Home() {
 
         {/* Video carousel section */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7, ease: [0.215, 0.61, 0.355, 1] }}
-          className="mt-28 pt-14 border-t border-cream/10"
+          initial={{ opacity: 0, x: -80 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ amount: 0.2 }}
+          transition={{ duration: 0.8, ease: [0.215, 0.61, 0.355, 1] }}
+          className="mt-28"
         >
-          <div className="flex items-center gap-4 mb-12">
-            <span className="text-xs font-bold tracking-[0.3em] uppercase text-orange">
+          <div className="mb-12">
+            <span className="text-lg font-bold tracking-[0.3em] uppercase text-orange">
               Top Performing
-            </span>
-            <div className="flex-1 h-px bg-cream/10" />
-            <span className="text-xs font-bold tracking-[0.3em] uppercase text-cream/30">
-              Most Views
             </span>
           </div>
 
-          <div className="overflow-hidden -mx-6 sm:-mx-8 lg:-mx-12">
-            <motion.div
-              drag="x"
-              dragConstraints={{ right: 0, left: -800 }}
-              className="flex gap-6 px-6 sm:px-8 lg:px-12 cursor-grab active:cursor-grabbing"
-            >
-              {[1, 2, 3, 4, 5, 6].map((i) => (
+          <div
+            onMouseMove={(e) => {
+              const container = e.currentTarget;
+              const rect = container.getBoundingClientRect();
+              const percent = (e.clientX - rect.left) / rect.width;
+              const maxScroll = container.scrollWidth - rect.width;
+              container.scrollLeft = maxScroll * percent;
+            }}
+            className="overflow-x-scroll scrollbar-hide -mx-6 sm:-mx-8 lg:-mx-12"
+          >
+            <div className="flex gap-6 px-6 sm:px-8 lg:px-12 w-max">
+              {[
+                { gif: "/videos/reel1.gif", views: "3.1M", link: "https://www.instagram.com/reel/DUlLiqLkcFC/" },
+                { gif: "/videos/reel2.gif", views: "2.7M", link: "https://www.instagram.com/reel/DRnGP-kkreS/" },
+                { gif: "/videos/reel3.gif", views: "70.8K", link: "https://www.instagram.com/reel/DJCGdPvT6qY/" },
+                { gif: "/videos/reel4.gif", views: "335K", link: "https://www.instagram.com/reel/DIjFFAUTD5v/" },
+                { gif: "/videos/reel5.gif", views: "6.2M", link: "https://www.instagram.com/reel/DS4jOvGiRDC/" },
+                { gif: "/videos/reel6.gif", views: "1.2M", link: "https://www.instagram.com/reel/DY4OVgrsK6V/" },
+              ].map((reel, i) => (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: i * 0.08, ease: [0.215, 0.61, 0.355, 1] }}
-                  className="min-w-[280px] sm:min-w-[320px] lg:min-w-[380px] flex-shrink-0"
+                  className="w-[280px] sm:w-[320px] lg:w-[380px] flex-shrink-0"
                 >
-                  <div className="aspect-video w-full bg-cream/5 flex items-center justify-center text-cream/20 text-xs font-bold tracking-[0.2em] uppercase">
-                    Video
-                  </div>
-                  <div className="pt-4 flex items-center justify-between">
-                    <div className="h-3 w-24 bg-cream/5" />
-                    <div className="h-3 w-20 bg-cream/5" />
-                  </div>
+                  <a href={reel.link} target="_blank" rel="noopener noreferrer" className="block relative aspect-[9/16] w-full bg-purple overflow-hidden">
+                    <Image
+                      src={reel.gif}
+                      alt={`Reel ${i + 1}`}
+                      width={380}
+                      height={675}
+                      unoptimized
+                      className="w-full h-full object-cover"
+                    />
+                    <span className="absolute bottom-3 right-4 text-2xl sm:text-3xl lg:text-4xl font-black text-white drop-shadow-[0_3px_8px_rgba(0,0,0,0.9)]">
+                      {reel.views}
+                    </span>
+                  </a>
                 </motion.div>
               ))}
-            </motion.div>
+            </div>
           </div>
         </motion.div>
 
         {/* Testimonials section */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7, ease: [0.215, 0.61, 0.355, 1] }}
-          className="mt-28 pt-14 border-t border-cream/10"
+          initial={{ opacity: 0, x: 80 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ amount: 0.2 }}
+          transition={{ duration: 0.8, ease: [0.215, 0.61, 0.355, 1] }}
+          className="mt-28"
         >
-          <div className="flex items-center gap-4 mb-12">
-            <span className="text-xs font-bold tracking-[0.3em] uppercase text-orange">
+          <div className="mb-12">
+            <span className="text-lg font-bold tracking-[0.3em] uppercase text-orange">
               Testimonials
             </span>
-            <div className="flex-1 h-px bg-cream/10" />
           </div>
 
-          <div className="grid sm:grid-cols-3 gap-6 lg:gap-8">
-            {[0, 1, 2].map((i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.12, ease: [0.215, 0.61, 0.355, 1] }}
-                className="border border-cream/10 p-6 lg:p-8 flex flex-col"
-              >
-                <div className="aspect-square w-full bg-cream/5 mb-6 flex items-center justify-center text-cream/20 text-xs font-bold tracking-[0.2em] uppercase">
-                  Photo
-                </div>
-                <div className="border-t border-cream/10 pt-4 space-y-2">
-                  <div className="h-4 w-3/4 bg-cream/5" />
-                  <div className="h-3 w-1/2 bg-cream/5" />
-                </div>
-              </motion.div>
-            ))}
+          <div
+            onMouseMove={(e) => {
+              const container = e.currentTarget;
+              const rect = container.getBoundingClientRect();
+              const percent = (e.clientX - rect.left) / rect.width;
+              const maxScroll = container.scrollWidth - rect.width;
+              container.scrollLeft = maxScroll * percent;
+            }}
+            className="overflow-x-scroll scrollbar-hide -mx-6 sm:-mx-8 lg:-mx-12"
+          >
+            <div className="flex gap-6 px-6 sm:px-8 lg:px-12 w-max">
+              {[
+                { image: "/images/testimonial-deonn.jpg", handle: "@de.onn", text: "Ever since I started working with Raza, my life has just become way simpler. I'm able to expand into different content genres without worrying about my videos getting edited." },
+                { image: "/images/testimonial-itzthomzi.jpg", handle: "@itzthomzi", text: "I have content scheduled for the next two weeks now. Wouldn't have been possible without such a great editor." },
+                { image: "/images/testimonial-socialfayaz.jpg", handle: "@social.fayaz", text: "After working with me for about a year, Raza has now assigned a professional editor from his team to help me full time. No complaints." },
+              ].map((testimonial, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: i * 0.12, ease: [0.215, 0.61, 0.355, 1] }}
+                  className="w-[280px] sm:w-[320px] lg:w-[380px] flex-shrink-0 p-6 lg:p-8 flex flex-col"
+                >
+                  <div className="relative aspect-square w-full rounded-2xl overflow-hidden bg-cream/5">
+                    <Image
+                      src={testimonial.image}
+                      alt={testimonial.handle}
+                      width={400}
+                      height={400}
+                      sizes="(max-width: 640px) 280px, (max-width: 1024px) 320px, 380px"
+                      className="w-full h-full object-cover"
+                      style={{ imageRendering: "auto" }}
+                    />
+                    <span className="absolute bottom-2 right-3 text-sm text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                      {testimonial.handle}
+                    </span>
+                  </div>
+                  <div className="pt-4">
+                    <span className="text-6xl leading-none text-orange/40 font-serif select-none">&ldquo;</span>
+                    <p className="text-cream/70 text-sm sm:text-base leading-relaxed -mt-4">
+                      {testimonial.text}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </motion.div>
 
         {/* Bottom editorial bar */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
+          initial={{ opacity: 0, x: -80 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ amount: 0.2 }}
+          transition={{ duration: 0.7, ease: [0.215, 0.61, 0.355, 1] }}
           className="mt-20 pt-8 border-t border-cream/10"
         >
           <div className="flex items-center justify-between">
