@@ -154,14 +154,14 @@ const fadeUp = {
                 variants={fadeUp}
                 initial="hidden"
                 animate="visible"
-                className="inline-block bg-orange px-4 py-2 mt-2 animate-[shake_0.5s_infinite]"
+                className="inline-block bg-orange px-4 py-2 mt-2 animate-shake"
               >
                 <motion.h1
                   custom={5}
                   variants={fadeUp}
                   initial="hidden"
                   animate="visible"
-                  className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black leading-[0.9] tracking-tight text-white animate-[shake_0.5s_infinite]"
+                  className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black leading-[0.9] tracking-tight text-white animate-shake"
                 >
                   THAT HITS.
                 </motion.h1>
@@ -473,16 +473,13 @@ const fadeUp = {
 
       <style jsx>{`
         @keyframes shake {
-          0%, 100% { transform: translateX(0) rotate(0deg); }
-          20% { transform: translateX(-2px) rotate(-1deg); }
-          40% { transform: translateX(2px) rotate(1deg); }
-          60% { transform: translateX(-2px) rotate(-1deg); }
-          80% { transform: translateX(2px) rotate(1deg); }
+          0%, 50%, 100% { transform: translateX(0) rotate(0deg); }
+          10% { transform: translateX(-2px) rotate(-1deg); }
+          25% { transform: translateX(2px) rotate(1deg); }
+          40% { transform: translateX(-2px) rotate(-1deg); }
         }
-        .animate-[shake_0.5s_infinite] {
-          animation: shake 0.5s infinite;
-          animation-delay: 1s;
-          animation-iteration-count: infinite;
+        .animate-shake {
+          animation: shake 0.5s 1s infinite;
         }
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
