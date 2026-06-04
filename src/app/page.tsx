@@ -368,7 +368,7 @@ const fadeUp = {
                 ))}
               </div>
             </div>
-            <div className="flex items-center justify-end gap-2 mt-4 px-6 sm:px-8 lg:px-12">
+            <div className="hidden sm:flex items-center justify-end gap-2 mt-4 px-6 sm:px-8 lg:px-12">
               <button onClick={() => scrollCarousel("left", reelRef)} className="w-10 h-10 rounded-full bg-orange/20 hover:bg-orange/40 flex items-center justify-center text-cream text-xl font-bold transition-colors cursor-pointer">
                 ‹
               </button>
@@ -438,7 +438,7 @@ const fadeUp = {
                 ))}
               </div>
             </div>
-            <div className="flex items-center justify-end gap-2 mt-4 px-6 sm:px-8 lg:px-12">
+            <div className="hidden sm:flex items-center justify-end gap-2 mt-4 px-6 sm:px-8 lg:px-12">
               <button onClick={() => scrollCarousel("left", testimonialRef)} className="w-10 h-10 rounded-full bg-orange/20 hover:bg-orange/40 flex items-center justify-center text-cream text-xl font-bold transition-colors cursor-pointer">
                 ‹
               </button>
