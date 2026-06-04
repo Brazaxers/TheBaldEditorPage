@@ -165,14 +165,20 @@ const fadeUp = {
               >
                 EDITING
               </motion.h1>
-              <div
-                onClick={triggerShake}
-                className={`inline-block bg-orange px-4 py-2 mt-2 cursor-pointer ${isShaking ? "animate-shake" : ""}`}
+              <motion.div
+                custom={5}
+                variants={fadeUp}
+                initial="hidden"
+                animate="visible"
+                className="inline-block bg-orange px-4 py-2 mt-2"
               >
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black leading-[0.9] tracking-tight text-white">
+                <h1
+                  onClick={triggerShake}
+                  className={`text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black leading-[0.9] tracking-tight text-white ${isShaking ? "animate-shake" : ""}`}
+                >
                   THAT HITS.
                 </h1>
-              </div>
+              </motion.div>
             </div>
 
             {/* Editorial pull quote style */}
