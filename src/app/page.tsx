@@ -1,6 +1,6 @@
-"use client";
+﻿"use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Send } from "lucide-react";
@@ -72,85 +72,51 @@ export default function Home() {
     },
   };
 
-  const useDragScroll = (containerRef: React.RefObject<HTMLDivElement | null>) => {
-    const isDragging = useRef(false);
-    const startX = useRef(0);
-    const scrollLeft = useRef(0);
-    const velocity = useRef(0);
-    const lastX = useRef(0);
-    const lastTime = useRef(0);
-    const rafId = useRef<number | null>(null);
-
-    const applyMomentum = () => {
-      if (!containerRef.current || Math.abs(velocity.current) < 0.5) return;
-      containerRef.current.scrollLeft -= velocity.current;
-      velocity.current *= 0.95;
-      rafId.current = requestAnimationFrame(applyMomentum);
-    };
-
-    const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
-      if (!containerRef.current) return;
-      if (rafId.current) cancelAnimationFrame(rafId.current);
-      isDragging.current = true;
-      startX.current = e.pageX - containerRef.current.offsetLeft;
-      scrollLeft.current = containerRef.current.scrollLeft;
-      lastX.current = e.pageX;
-      lastTime.current = Date.now();
-      velocity.current = 0;
-      containerRef.current.style.cursor = "grabbing";
-      containerRef.current.setPointerCapture(e.pointerId);
-    };
-
-    const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-      if (!isDragging.current || !containerRef.current) return;
-      e.preventDefault();
-      const x = e.pageX - containerRef.current.offsetLeft;
-      const walk = (x - startX.current) * 1.5;
-      containerRef.current.scrollLeft = scrollLeft.current - walk;
-      const now = Date.now();
-      const dt = now - lastTime.current;
-      if (dt > 0) {
-        velocity.current = ((e.pageX - lastX.current) * 1.5) / dt * 16;
-      }
-      lastX.current = e.pageX;
-      lastTime.current = now;
-    };
-
-    const onPointerUp = () => {
-      if (!containerRef.current) return;
-      isDragging.current = false;
-      containerRef.current.style.cursor = "grab";
-      rafId.current = requestAnimationFrame(applyMomentum);
-    };
-
-    return { onPointerDown, onPointerMove, onPointerUp };
-  };
-
-  const reelsRef = useRef<HTMLDivElement>(null);
-  const testimonialsRef = useRef<HTMLDivElement>(null);
-  const reelsDrag = useDragScroll(reelsRef);
-  const testimonialsDrag = useDragScroll(testimonialsRef);
-
-  const reels = [
-    { gif: "/videos/reel1.gif", views: "3.1M", link: "https://www.instagram.com/reel/DUlLiqLkcFC/" },
-    { gif: "/videos/reel2.gif", views: "2.7M", link: "https://www.instagram.com/reel/DRnGP-kkreS/" },
-    { gif: "/videos/reel3.gif", views: "70.8K", link: "https://www.instagram.com/reel/DJCGdPvT6qY/" },
-    { gif: "/videos/reel4.gif", views: "335K", link: "https://www.instagram.com/reel/DIjFFAUTD5v/" },
-    { gif: "/videos/reel5.gif", views: "6.2M", link: "https://www.instagram.com/reel/DS4jOvGiRDC/" },
-    { gif: "/videos/reel6.gif", views: "1.2M", link: "https://www.instagram.com/reel/DY4OVgrsK6V/" },
-  ];
-
-  const testimonials = [
-    { image: "/images/testimonial-deonn.jpg", handle: "@de.onn", link: "https://www.instagram.com/de.onn/", text: "Ever since I started working with Raza, my life has just become way simpler. I'm able to expand into different content genres without worrying about my videos getting edited." },
-    { image: "/images/testimonial-itzthomzi.jpg", handle: "@itzthomzi", link: "https://www.instagram.com/itzthomzi/", text: "I have content scheduled for the next two weeks now. Wouldn't have been possible without such a great editor." },
-    { image: "/images/testimonial-socialfayaz.jpg", handle: "@social.fayaz", link: "https://www.instagram.com/social.fayaz/", text: "After working with me for about a year, Raza has now assigned a professional editor from his team to help me full time. No complaints." },
-  ];
-
   return (
     <main className="min-h-screen bg-purple text-cream overflow-hidden">
+      {/* Top editorial bar */}
+      <motion.div
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: 1 }}
+        transition={{ duration: 1, ease: [0.215, 0.61, 0.355, 1] }}
+        className="h-1.5 bg-orange origin-left"
+      />
+
       <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-12 lg:py-16">
+        {/* Header row ΓÇö editorial style */}
+        <div className="flex items-center justify-between mb-16">
+          <motion.div
+            custom={0}
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            className="w-44"
+          >
+            <Image
+              src="/images/primary-logo.png"
+              alt="The Bald Editor"
+              width={176}
+              height={66}
+              className="w-full h-auto"
+              priority
+            />
+          </motion.div>
+          <motion.p
+            custom={1}
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            className="text-xs font-bold tracking-[0.3em] uppercase text-cream/40"
+          >
+            Video Editing Studio
+          </motion.p>
+        </div>
+
+        {/* Main editorial grid */}
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-12">
+          {/* Left column ΓÇö content */}
           <div className="lg:col-span-7 flex flex-col justify-center">
+            {/* Issue/date stamp ΓÇö editorial detail */}
             <motion.div
               custom={2}
               variants={fadeUp}
@@ -163,7 +129,7 @@ export default function Home() {
               </span>
             </motion.div>
 
-            {/* Big headline — stacked, editorial */}
+            {/* Big headline ΓÇö stacked, editorial */}
             <div className="space-y-0 mb-10">
               <motion.h1
                 custom={3}
@@ -222,7 +188,7 @@ export default function Home() {
               </p>
             </motion.div>
 
-            {/* Contact form — editorial style */}
+            {/* Contact form ΓÇö editorial style */}
             <motion.div
               custom={9}
               variants={fadeUp}
@@ -302,7 +268,7 @@ export default function Home() {
                     <p className="text-sm text-red-400 font-medium">{error}</p>
                   )}
 
-                  {/* CTA — editorial, sharp */}
+                  {/* CTA ΓÇö editorial, sharp */}
                   <div className="pt-2">
                     <motion.button
                       type="submit"
@@ -329,7 +295,7 @@ export default function Home() {
             </motion.div>
           </div>
 
-          {/* Right column — mascot + visual */}
+          {/* Right column ΓÇö mascot + visual */}
           <div className="lg:col-span-5 flex flex-col items-center justify-center relative">
             {/* Color block behind mascot */}
             <motion.div
@@ -374,30 +340,30 @@ export default function Home() {
           className="mt-28"
         >
           <div className="mb-12">
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, ease: [0.215, 0.61, 0.355, 1] }}
-              className="inline-block bg-orange px-4 py-2"
-            >
-              <span className="text-2xl sm:text-3xl lg:text-4xl font-black leading-[0.9] tracking-tight text-white">
-                TOP PERFORMING
-              </span>
-            </motion.div>
+            <span className="text-lg font-bold tracking-[0.3em] uppercase text-orange">
+              Top Performing
+            </span>
           </div>
 
           <div
-            ref={reelsRef}
-            onPointerDown={reelsDrag.onPointerDown}
-            onPointerMove={reelsDrag.onPointerMove}
-            onPointerUp={reelsDrag.onPointerUp}
-            onPointerLeave={reelsDrag.onPointerUp}
-            style={{ cursor: "grab" }}
-            className="overflow-x-scroll scrollbar-hide -mx-6 sm:-mx-8 lg:-mx-12 py-2 select-none"
+            onMouseMove={(e) => {
+              const container = e.currentTarget;
+              const rect = container.getBoundingClientRect();
+              const percent = (e.clientX - rect.left) / rect.width;
+              const maxScroll = container.scrollWidth - rect.width;
+              container.scrollLeft = maxScroll * percent;
+            }}
+            className="overflow-x-scroll scrollbar-hide -mx-6 sm:-mx-8 lg:-mx-12 py-2"
           >
             <div className="flex gap-6 px-6 sm:px-8 lg:px-12 w-max">
-              {[...reels, ...reels].map((reel, i) => (
+              {[
+                { gif: "/videos/reel1.gif", views: "3.1M", link: "https://www.instagram.com/reel/DUlLiqLkcFC/" },
+                { gif: "/videos/reel2.gif", views: "2.7M", link: "https://www.instagram.com/reel/DRnGP-kkreS/" },
+                { gif: "/videos/reel3.gif", views: "70.8K", link: "https://www.instagram.com/reel/DJCGdPvT6qY/" },
+                { gif: "/videos/reel4.gif", views: "335K", link: "https://www.instagram.com/reel/DIjFFAUTD5v/" },
+                { gif: "/videos/reel5.gif", views: "6.2M", link: "https://www.instagram.com/reel/DS4jOvGiRDC/" },
+                { gif: "/videos/reel6.gif", views: "1.2M", link: "https://www.instagram.com/reel/DY4OVgrsK6V/" },
+              ].map((reel, i) => (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, y: 24 }}
@@ -405,13 +371,13 @@ export default function Home() {
                   whileHover={{ scale: 1.03, zIndex: 10 }}
                   whileTap={{ scale: 1.03 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: (i % reels.length) * 0.08, ease: [0.215, 0.61, 0.355, 1] }}
+                  transition={{ duration: 0.6, delay: i * 0.08, ease: [0.215, 0.61, 0.355, 1] }}
                   className="w-[280px] sm:w-[320px] lg:w-[380px] flex-shrink-0"
                 >
-                  <a href={reel.link} target="_blank" rel="noopener noreferrer" draggable={false} className="block relative aspect-[9/16] w-full bg-purple overflow-hidden">
+                  <a href={reel.link} target="_blank" rel="noopener noreferrer" className="block relative aspect-[9/16] w-full bg-purple overflow-hidden">
                     <Image
                       src={reel.gif}
-                      alt={`Reel ${(i % reels.length) + 1}`}
+                      alt={`Reel ${i + 1}`}
                       width={380}
                       height={675}
                       unoptimized
@@ -436,30 +402,27 @@ export default function Home() {
           className="mt-28"
         >
           <div className="mb-12">
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, ease: [0.215, 0.61, 0.355, 1] }}
-              className="inline-block bg-orange px-4 py-2"
-            >
-              <span className="text-2xl sm:text-3xl lg:text-4xl font-black leading-[0.9] tracking-tight text-white">
-                TESTIMONIALS
-              </span>
-            </motion.div>
+            <span className="text-lg font-bold tracking-[0.3em] uppercase text-orange">
+              Testimonials
+            </span>
           </div>
 
           <div
-            ref={testimonialsRef}
-            onPointerDown={testimonialsDrag.onPointerDown}
-            onPointerMove={testimonialsDrag.onPointerMove}
-            onPointerUp={testimonialsDrag.onPointerUp}
-            onPointerLeave={testimonialsDrag.onPointerUp}
-            style={{ cursor: "grab" }}
-            className="overflow-x-scroll scrollbar-hide -mx-6 sm:-mx-8 lg:-mx-12 py-2 select-none"
+            onMouseMove={(e) => {
+              const container = e.currentTarget;
+              const rect = container.getBoundingClientRect();
+              const percent = (e.clientX - rect.left) / rect.width;
+              const maxScroll = container.scrollWidth - rect.width;
+              container.scrollLeft = maxScroll * percent;
+            }}
+            className="overflow-x-scroll scrollbar-hide -mx-6 sm:-mx-8 lg:-mx-12 py-2"
           >
             <div className="flex gap-6 px-6 sm:px-8 lg:px-12 w-max">
-              {[...testimonials, ...testimonials].map((testimonial, i) => (
+              {[
+                { image: "/images/testimonial-deonn.jpg", handle: "@de.onn", text: "Ever since I started working with Raza, my life has just become way simpler. I'm able to expand into different content genres without worrying about my videos getting edited." },
+                { image: "/images/testimonial-itzthomzi.jpg", handle: "@itzthomzi", text: "I have content scheduled for the next two weeks now. Wouldn't have been possible without such a great editor." },
+                { image: "/images/testimonial-socialfayaz.jpg", handle: "@social.fayaz", text: "After working with me for about a year, Raza has now assigned a professional editor from his team to help me full time. No complaints." },
+              ].map((testimonial, i) => (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, y: 24 }}
@@ -467,10 +430,10 @@ export default function Home() {
                   whileHover={{ scale: 1.03, zIndex: 10 }}
                   whileTap={{ scale: 1.03 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: (i % testimonials.length) * 0.12, ease: [0.215, 0.61, 0.355, 1] }}
+                  transition={{ duration: 0.6, delay: i * 0.12, ease: [0.215, 0.61, 0.355, 1] }}
                   className="w-[280px] sm:w-[320px] lg:w-[380px] flex-shrink-0 p-6 lg:p-8 flex flex-col"
                 >
-                  <a href={testimonial.link} target="_blank" rel="noopener noreferrer" draggable={false} className="block relative aspect-square w-full rounded-2xl overflow-hidden bg-cream/5">
+                  <div className="relative aspect-square w-full rounded-2xl overflow-hidden bg-cream/5">
                     <Image
                       src={testimonial.image}
                       alt={testimonial.handle}
@@ -483,7 +446,7 @@ export default function Home() {
                     <span className="absolute bottom-2 right-3 text-sm text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                       {testimonial.handle}
                     </span>
-                  </a>
+                  </div>
                   <div className="pt-4">
                     <span className="text-6xl leading-none text-orange/40 font-serif select-none">&ldquo;</span>
                     <p className="text-cream/70 text-sm sm:text-base leading-relaxed -mt-4">
@@ -506,7 +469,7 @@ export default function Home() {
         >
           <div className="flex items-center justify-between">
             <p className="text-[10px] font-bold tracking-[0.3em] uppercase text-cream/30">
-              © 2026 The Bald Editor
+              ┬⌐ 2026 The Bald Editor
             </p>
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-orange" />
