@@ -19,10 +19,9 @@ export default function Home() {
   const triggerShake = () => setShakeTrigger(prev => prev + 1);
 
   useEffect(() => {
-    const timeout = setTimeout(() => triggerShake(), 100);
+    triggerShake();
     const interval = setInterval(triggerShake, 1000);
     setTimeout(() => clearInterval(interval), 5000);
-    return () => clearTimeout(timeout);
   }, []);
 
   const scrollCarousel = (dir: "left" | "right", ref: React.RefObject<HTMLDivElement | null>) => {
@@ -164,9 +163,10 @@ const fadeUp = {
                 variants={fadeUp}
                 initial="hidden"
                 animate="visible"
-                style={shakeTrigger > 0 ? { animation: "shake 0.5s" } : {}}
                 onClick={triggerShake}
                 className="inline-block bg-orange px-4 py-2 mt-2 cursor-pointer"
+                style={{ animation: "shake 0.5s" }}
+                key={`box-${shakeTrigger}`}
               >
                 <motion.h1
                   custom={5}
@@ -174,7 +174,8 @@ const fadeUp = {
                   initial="hidden"
                   animate="visible"
                   className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black leading-[0.9] tracking-tight text-white"
-                  style={shakeTrigger > 0 ? { animation: "shake 0.5s" } : {}}
+                  style={{ animation: "shake 0.5s" }}
+                  key={`text-${shakeTrigger}`}
                 >
                   THAT HITS.
                 </motion.h1>
