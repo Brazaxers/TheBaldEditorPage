@@ -154,7 +154,7 @@ const fadeUp = {
                 variants={fadeUp}
                 initial="hidden"
                 animate="visible"
-                className="inline-block bg-orange px-4 py-2 mt-2"
+                className="inline-block bg-orange px-4 py-2 mt-2 animate-[shake_0.5s_infinite]"
               >
                 <motion.h1
                   custom={5}
