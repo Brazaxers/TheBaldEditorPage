@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Send } from "lucide-react";
@@ -11,9 +11,19 @@ export default function Home() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const [shakeTrigger, setShakeTrigger] = useState(0);
 
   const reelRef = useRef<HTMLDivElement>(null);
   const testimonialRef = useRef<HTMLDivElement>(null);
+
+  const triggerShake = () => setShakeTrigger(prev => prev + 1);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => triggerShake(), 100);
+    const interval = setInterval(triggerShake, 1000);
+    setTimeout(() => clearInterval(interval), 5000);
+    return () => clearTimeout(timeout);
+  }, []);
 
   const scrollCarousel = (dir: "left" | "right", ref: React.RefObject<HTMLDivElement | null>) => {
     if (!ref.current) return;
@@ -154,14 +164,17 @@ const fadeUp = {
                 variants={fadeUp}
                 initial="hidden"
                 animate="visible"
-                className="inline-block bg-orange px-4 py-2 mt-2 animate-shake"
+                style={shakeTrigger > 0 ? { animation: "shake 0.5s" } : {}}
+                onClick={triggerShake}
+                className="inline-block bg-orange px-4 py-2 mt-2 cursor-pointer"
               >
                 <motion.h1
                   custom={5}
                   variants={fadeUp}
                   initial="hidden"
                   animate="visible"
-                  className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black leading-[0.9] tracking-tight text-white animate-shake"
+                  className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black leading-[0.9] tracking-tight text-white"
+                  style={shakeTrigger > 0 ? { animation: "shake 0.5s" } : {}}
                 >
                   THAT HITS.
                 </motion.h1>
@@ -478,9 +491,6 @@ const fadeUp = {
           40% { transform: translateX(3px) rotate(2deg); }
           60% { transform: translateX(-3px) rotate(-2deg); }
           80% { transform: translateX(3px) rotate(2deg); }
-        }
-        .animate-shake {
-          animation: shake 0.5s 1s infinite;
         }
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
