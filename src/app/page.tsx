@@ -12,11 +12,15 @@ export default function Home() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [shakeTrigger, setShakeTrigger] = useState(0);
+  const [isShaking, setIsShaking] = useState(false);
 
   const reelRef = useRef<HTMLDivElement>(null);
   const testimonialRef = useRef<HTMLDivElement>(null);
 
-  const triggerShake = () => setShakeTrigger(prev => prev + 1);
+  const triggerShake = () => {
+    setIsShaking(true);
+    setTimeout(() => setIsShaking(false), 500);
+  };
 
   useEffect(() => {
     triggerShake();
@@ -165,8 +169,8 @@ const fadeUp = {
                 animate="visible"
                 onClick={triggerShake}
                 className="inline-block bg-orange px-4 py-2 mt-2 cursor-pointer"
-                style={{ animation: "shake 0.5s" }}
-                key={`box-${shakeTrigger}`}
+                style={isShaking ? { animation: "shake 0.5s" } : {}}
+                key={`box-${isShaking ? "on" : "off"}`}
               >
                 <motion.h1
                   custom={5}
@@ -174,8 +178,8 @@ const fadeUp = {
                   initial="hidden"
                   animate="visible"
                   className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black leading-[0.9] tracking-tight text-white"
-                  style={{ animation: "shake 0.5s" }}
-                  key={`text-${shakeTrigger}`}
+                  style={isShaking ? { animation: "shake 0.5s" } : {}}
+                  key={`text-${isShaking ? "on" : "off"}`}
                 >
                   THAT HITS.
                 </motion.h1>
