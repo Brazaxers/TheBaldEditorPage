@@ -65,6 +65,13 @@ export default function Home() {
     }),
   };
 
+  const shake = {
+    animate: {
+      x: [0, -2, 2, -2, 2, -1, 1, 0],
+      transition: { duration: 0.5, repeat: Infinity, repeatDelay: 0.5 },
+    },
+  };
+
   return (
     <main className="min-h-screen bg-purple text-cream overflow-hidden">
       {/* Top editorial bar */}
@@ -115,13 +122,10 @@ export default function Home() {
               variants={fadeUp}
               initial="hidden"
               animate="visible"
-              className="flex items-center gap-3 mb-8"
+              className="mb-8"
             >
               <span className="text-xs font-bold tracking-[0.2em] uppercase text-orange">
-                Now Accepting Clients
-              </span>
-              <span className="text-xs font-bold tracking-[0.2em] uppercase text-cream/30">
-                2026
+                3/10 slots left!
               </span>
             </motion.div>
 
@@ -152,9 +156,13 @@ export default function Home() {
                 animate="visible"
                 className="inline-block bg-orange px-4 py-2 mt-2"
               >
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black leading-[0.9] tracking-tight text-white">
+                <motion.h1
+                  variants={shake}
+                  animate="animate"
+                  className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black leading-[0.9] tracking-tight text-white"
+                >
                   THAT HITS
-                </h1>
+                </motion.h1>
               </motion.div>
               <motion.h1
                 custom={6}
@@ -176,7 +184,7 @@ export default function Home() {
               className="border-l-4 border-orange pl-6 mb-10"
             >
               <p className="text-lg sm:text-xl text-cream/60 font-medium leading-relaxed">
-                For content creators, influencers, and brands who refuse to blend in.
+                For content creators and brands who refuse to blend in.
               </p>
             </motion.div>
 
