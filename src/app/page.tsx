@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Send } from "lucide-react";
+import { Agentation } from "agentation";
 
 export default function Home() {
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", instagram: "" });
@@ -469,6 +470,7 @@ export default function Home() {
             </div>
           </div>
         </motion.div>
+        {process.env.NODE_ENV === "development" && <Agentation />}
       </div>
     </main>
   );
